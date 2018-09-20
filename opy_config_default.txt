@@ -93,6 +93,7 @@ math
 
 plain_files = '''
 opy_config.txt
+__init__.py
 '''
 
 
@@ -113,5 +114,4 @@ realtime
 metaclass
 s2clientprotocol
 async
-
 '''

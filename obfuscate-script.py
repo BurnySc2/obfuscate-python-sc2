@@ -94,7 +94,7 @@ def build_obfuscate_config(input_folder, config_path, config_output_path):
 
     # All enums from sc2/data.py
     all_enums = ["UnitTypeId", "UpgradeId", "AbilityId", "BuffId", "EffectId", "PlayerType", "Difficulty", "Status", "Result", "Alert", "ChatChannel", "Race", "DisplayType", "Alliance", "CloakState", "Attribute", "TargetType", "Target", "ActionResult", "CreateGameError", "Weapon", "ActionChat", "ResponseCreateGame"]
-    additional_methods = ["parent", "path", "logging"]
+    additional_methods = ["parent", "path", "logging", "argparse", "parser", "args", "aiohttp"]
     enums_pattern1 = "({})\.(\w+)".format("|".join(all_enums + additional_methods))
     enums1 = re.compile(enums_pattern1)
 
