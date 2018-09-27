@@ -83,6 +83,11 @@ Thanks to AiSee to figuring this one out!
 
 Create a new entry of your library name, e.g. `numpy`, to the list of ignore names in `opy_config_default.txt` in the variable `external_modules`. 
 
+### Can't the pyinstaller file be easily extracted?
+
+If not encrypted, yes it can via [python-exe-unpacker](https://github.com/countercept/python-exe-unpacker).
+However, it may still take some times to read the code obfuscated by [Opy](https://github.com/QQuick/Opy).
+
 ## Issues
 
 - There may be some enums not being taken care of.
