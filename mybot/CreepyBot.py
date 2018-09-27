@@ -2124,15 +2124,15 @@ def main():
     #     Computer(Race.Random, Difficulty.CheatMoney)
     # ], realtime=False)
 
-    sc2.run_game(sc2.maps.get("(2)16-BitLE"), [
-        Bot(Race.Zerg, CreepyBot()),
-        Computer(Race.Protoss, Difficulty.CheatInsane)
-    ], realtime=False)
+    # sc2.run_game(sc2.maps.get("(2)16-BitLE"), [
+    #     Bot(Race.Zerg, CreepyBot()),
+    #     Computer(Race.Protoss, Difficulty.CheatInsane)
+    # ], realtime=False)
 
-    # sc2.run_game(sc2.maps.get("(2)RedshiftLE"), [
-    #     Human(Race.Protoss),
-    #     Bot(Race.Zerg, CreepyBot())
-    # ], realtime=True)
+    sc2.run_game(sc2.maps.get("(3)ParaSiteLE"), [
+        Human(Race.Protoss),
+        Bot(Race.Zerg, CreepyBot())
+    ], realtime=True)
 
 if __name__ == '__main__':
     main()
