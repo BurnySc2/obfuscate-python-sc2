@@ -81,7 +81,7 @@ Thanks to AiSee to figuring this one out!
 
 ### I use another library but it keeps obfuscating the function methods
 
-Create a new entry of your library name, e.g. `numpy`, to the list of ignore names in `opy_config_default.txt` in the variable `external_modules`. 
+Create a new entry of your library name, e.g. `numpy`, and add it to the list of ignore names in `opy_config_default.txt` in the variable `external_modules`. 
 
 ### Can't the pyinstaller file be easily extracted?
 
