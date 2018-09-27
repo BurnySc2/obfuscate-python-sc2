@@ -80,6 +80,7 @@ random
 codecs
 shutil
 math
+numpy
 '''
 
 
@@ -94,6 +95,7 @@ math
 plain_files = '''
 opy_config.txt
 __init__.py
+run.py
 '''
 
 
