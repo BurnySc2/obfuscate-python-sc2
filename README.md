@@ -15,7 +15,7 @@
 
 - Install MinGW_w64 by following the instructions [here](https://wiki.python.org/moin/WindowsCompilers#GCC_-_MinGW-w64_.28x86.2C_x64.29)
 
-- #####Restart your computer
+- ###Restart your computer
 
 - `pip install pycrypt` or `python -m pip install pycrypt`
 
