@@ -17,9 +17,9 @@
 
 - Restart your computer
 
-- `pip install pycrypt` or `python -m pip install pycrypt`
+- Run `pip install pycrypt` or `python -m pip install pycrypt`
 
-- Now just run `python pyinstaller-script.py`. Don't forget to change your encryption key in `encryptionkey.txt`.
+- Now just run `python pyinstaller-script.py` to create your `run.exe`. Don't forget to change your encryption key in `encryptionkey.txt`.
 
 
 ## Preparation for Encryption - Variant 2 (1.4gb)
@@ -47,7 +47,7 @@
 
 - Now try installing pycrypto again
 
-- Now just run `python pyinstaller-script.py`. Don't forget to change your encryption key in `encryptionkey.txt`.
+- Now just run `python pyinstaller-script.py` to create your `run.exe`. Don't forget to change your encryption key in `encryptionkey.txt`.
 
 ## Obfuscating and compiling an example
 - Run `python obfuscate-script.py`
