@@ -5,9 +5,17 @@
 # Installation
 
 - Download the repo
+
 - `pip install -r requirements.txt` or `python -m pip -r requirements.txt`
 
-- If you also want to encrypt your code with an encryption key, you have to do the following (only tested on windows):
+- In `pyinstaller-script.py` you need to change your StarCraft 2 and PyInstaller path to match the files on your file system
+    
+    ```
+    starcraft2_path = r"C:\games\StarCraft II"
+    pyinstaller_path = r"C:\python366_32bit\Scripts\pyinstaller.exe"
+    ```
+
+- If you also want to encrypt your code with an encryption key, you have to do one of the following `Preparation for Encryption` (only tested on windows):
 
 ## Preparation for Encryption - Variant 1 (700mb)
 
@@ -79,7 +87,7 @@ Thanks to AiSee to figuring this one out!
 
 ## FAQ
 
-### I use another library but it keeps obfuscating the function methods
+### I use another library but it keeps obfuscating the function methods and as a result it crashes
 
 Create a new entry of your library name, e.g. `numpy`, and add it to the list of ignore names in `opy_config_default.txt` in the variable `external_modules`. 
 
