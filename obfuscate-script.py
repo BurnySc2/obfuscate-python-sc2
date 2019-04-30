@@ -21,8 +21,12 @@ def build_obfuscate_config(input_folder, config_path, config_output_path):
 
     """
     from sc2.data import race_gas, race_worker, race_townhalls, ActionResult, Attribute, Race, Difficulty
+    from sc2.ids.unit_typeid import (
+        BARRACKS,
+        COMMANDCENTER,
+    )
     """
-    imports_pattern1 = "(from) ([\w.]+) (import) ([\w, ]+)"
+    imports_pattern1 = "(from) ([\w.]+) (import) (\()?((\n[ \t])?([\w, ]+))+(\s\))?"
     import1 = re.compile(imports_pattern1)
     """
     import sc2 as sc
@@ -55,7 +59,7 @@ def build_obfuscate_config(input_folder, config_path, config_output_path):
     class DragonBot(burny_basic_ai.BurnyBasicAI):    
     class BurnyBasicAI(General, Frequentactions, Position, Conditions, sc2.BotAI):
     """
-    class_pattern = "(class) ([\w]+)(\([\w,.\[\] ]*\))*:"
+    class_pattern = "(class) ([\w]+)(\([\w,.\[\]\s]*\))*:"
     class1 = re.compile(class_pattern)
 
     """
@@ -68,9 +72,13 @@ def build_obfuscate_config(input_folder, config_path, config_output_path):
     async def get_available_abilities(self, units: Union[List[Unit], Units], ignore_resource_requirements=False) -> List[List[AbilityId]]:
     def closest(self, ps: Union["Units", List["Point2"], Set["Point2"]]) -> Union["Unit", "Pointlike"]:
     def empty_func():
+    def towards(
+        self, p: Union["Unit", "Pointlike"], distance: Union[int, float] = 1, limit: bool = False
+    ) -> "Pointlike":
     """
     # function_pattern = "(async )?(def) ([\w]+)\(([\w:,.=\[\]\"* ]+)\)([->\[\],\w\" ]+)*:"
-    function_pattern = "(async )?def ([\w]+)\((?:self ?,)? *([\*,:\[\]=\"\w ]*)\)"
+    # function_pattern = "(async )?def ([\w]+)\((?:self ?,)? *([\*,:\[\]=\"\w ]*)\)"
+    function_pattern = "(async )?def ([\w]+)\(([\s\n]+)?(?:self ?,)? *([\*,:\[\]=\"\w ]*)([\s\n]+)?\)"
     function1 = re.compile(function_pattern)
 
     # All enums from sc2/ids/*.py
@@ -174,6 +182,7 @@ def build_obfuscate_config(input_folder, config_path, config_output_path):
             filePath = os.path.join(dirName, fileName)
             keywordsSetInThisFile = {fileName.rstrip(".py")}
             with open(filePath) as f:
+                print(f"Checking file {filePath}")
                 text = f.read()
                 import1Result = re.findall(import1, text)
                 import2Result = re.findall(import2, text)

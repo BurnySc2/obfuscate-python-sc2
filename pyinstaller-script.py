@@ -3,22 +3,25 @@ import os, subprocess, sys
 """ Configuration """
 dirname = os.path.dirname(__file__)
 
-starcraft2_path = r"C:\games\StarCraft II"
-pyinstaller_path = r"C:\python366_32bit\Scripts\pyinstaller.exe"
+starcraft2_path = r"C:\Program Files (x86)\StarCraft II"
+python_path = r"C:\python366_32bit\python.exe"
 bot_folder_path = os.path.join(dirname, "mybot_obfuscated")
 run_file_path = os.path.join(dirname, "mybot_obfuscated/run.py")
 output_folder_path = os.path.join(dirname, "mybot_compiled")
 
 
-def build_pyinstaller_arguments(pyinstaller_path, starcraft2_path, python_sc2_path, run_file_path, output_folder_path, ecryption_key_path) -> list:
+def build_pyinstaller_arguments(python_path, starcraft2_path, python_sc2_path, run_file_path, output_folder_path, ecryption_key_path) -> list:
     """ Returns a list of subprocess.Popen(LIST) arguments """
     arguments = []
 
-    if os.path.isfile(pyinstaller_path):
-        arguments.append(pyinstaller_path)
-    else:
-        print("PyInstaller not found, using default pyinstaller argument: pyinstaller")
-        arguments.append("pyinstaller")
+    # if os.path.isfile(pyinstaller_path):
+    #     arguments.append(pyinstaller_path)
+    # else:
+    #     print("PyInstaller not found, using default pyinstaller argument: pyinstaller")
+    arguments.append(python_path)
+    arguments.append("-OO")
+    arguments.append("-m")
+    arguments.append("PyInstaller")
 
     arguments.append("--onefile")
 
@@ -67,7 +70,10 @@ if __name__ == "__main__":
     ecryption_key_path = os.path.join(dirname, "encryptionkey.txt")
 
     # Create the .exe file
-    pyinstaller_arguments = build_pyinstaller_arguments(pyinstaller_path, starcraft2_path, python_sc2_path, run_file_path, output_folder_path, ecryption_key_path)
+    pyinstaller_arguments = build_pyinstaller_arguments(python_path, starcraft2_path, python_sc2_path, run_file_path, output_folder_path, ecryption_key_path)
+
+    # # Disable assert statements
+    # pyinstaller_arguments.insert(1, "-O")
 
     process = subprocess.Popen(pyinstaller_arguments, stdout=subprocess.PIPE)
     result = process.communicate()

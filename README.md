@@ -58,6 +58,9 @@
 - Now just run `python pyinstaller-script.py` to create your `run.exe`. Don't forget to change your encryption key in `encryptionkey.txt`.
 
 ## Obfuscating and compiling an example
+
+- Edit `pyinstaller-script.py` and change the variables to point at your StarCraft II installation and your python installation, where you have pyinstaller and pycrypto installed
+
 - Run `python obfuscate-script.py`
 
     A folder called `mybot_obfuscated` will be created with the bot files now obfuscated and a copy of `python-sc2/sc2/`
@@ -65,7 +68,7 @@
 
     A folder called `mybot_compiled` will be created which has a single `.exe` file that can be run.
 
-- Run `mybot_compiled/run.exe`
+- Run `mybot_compiled/run.exe` to confirm that the bot is starting and running without errors
 
 ## How does it perform obfuscation?
 
@@ -98,4 +101,10 @@ However, it may still take some times to read the code obfuscated by [Opy](https
 
 ## Issues
 
-- There may be some enums not being taken care of.
+- Does not work with the class `__slots__` magic method
+
+- Does not work with f strings
+
+- All bot files need to be in the same folder (there have to be no sub folders in "mybot" folder)
+
+- There may be some enums of the python-sc2 library not being taken care of.
