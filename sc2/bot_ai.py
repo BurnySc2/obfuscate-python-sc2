@@ -918,22 +918,18 @@ class BotAI(DistanceCalculation):
             structure_type, (int, UnitTypeId)
         ), f"Needs to be int or UnitTypeId, but was: {type(structure_type)}"
         if isinstance(structure_type, int):
-            structure_type_value = structure_type
+            structure_type_value: int = structure_type
         else:
             structure_type_value = structure_type.value
         assert structure_type_value, f"structure_type can not be 0 or NOTAUNIT, but was: {structure_type_value}"
-        requirement_structure_ready: bool = next(
-            (
-                structure
-                for structure in self.structures
-                if structure._proto.unit_type == structure_type_value and structure.is_ready
-            ),
-            False,
+        max_value = max(
+            (s for s in self.structures if s._proto.unit_type == structure_type_value),
+            key=lambda structure: structure.build_progress,
+            default=0,
         )
-        if requirement_structure_ready:
-            return 1
-        ability = self._game_data.units[structure_type_value].creation_ability
-        return self._abilities_all_units[1].get(ability, 0)
+        if isinstance(max_value, Unit):
+            return max_value.build_progress
+        return max_value
 
     def tech_requirement_progress(self, structure_type: UnitTypeId) -> float:
         """ Returns the tech requirement progress for a specific building
@@ -962,14 +958,17 @@ class BotAI(DistanceCalculation):
             Race.Terran: TERRAN_TECH_REQUIREMENT,
             Race.Zerg: ZERG_TECH_REQUIREMENT,
         }
-        unit_info_id_value = race_dict[self.race][structure_type].value
+        unit_info_id = race_dict[self.race][structure_type]
+        unit_info_id_value = unit_info_id.value
         # The following commented out line is unreliable for ghost / thor as they return 0 which is incorrect
         # unit_info_id_value = self._game_data.units[structure_type.value]._proto.tech_requirement
         if not unit_info_id_value:  # Equivalent to "if unit_info_id_value == 0:"
             return 1
         progresses: List[int] = [self.structure_type_build_progress(unit_info_id_value)]
-        for equiv_structure in EQUIVALENTS_FOR_TECH_PROGRESS.get(structure_type, []):
-            progresses.append(self.structure_type_build_progress(equiv_structure))
+        for equiv_structure in EQUIVALENTS_FOR_TECH_PROGRESS.get(unit_info_id, []):
+            progresses.append(self.structure_type_build_progress(equiv_structure.value))
+        if structure_type == UnitTypeId.BARRACKS:
+            print(progresses)
         return max(progresses)
 
     def already_pending(self, unit_type: Union[UpgradeId, UnitTypeId]) -> float:
@@ -1125,7 +1124,9 @@ class BotAI(DistanceCalculation):
             }
             unit_info_id = race_dict[self.race][unit_type]
             logger.warning(
-                "{} Trying to produce unit {} in self.train() but tech requirement is not met: {}".format(self.time_formatted, unit_type, unit_info_id)
+                "{} Trying to produce unit {} in self.train() but tech requirement is not met: {}".format(
+                    self.time_formatted, unit_type, unit_info_id
+                )
             )
             return 0
 

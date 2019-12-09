@@ -47,7 +47,7 @@ class SC2Process:
         render: bool = False,
         sc2_version: str = None,
         base_build: str = None,
-        data_hash: str = None
+        data_hash: str = None,
     ) -> None:
         assert isinstance(host, str)
         assert isinstance(port, int) or port is None
@@ -66,7 +66,6 @@ class SC2Process:
         self._sc2_version = sc2_version
         self._base_build = base_build
         self._data_hash = data_hash
-
 
     async def __aenter__(self):
         kill_switch.add(self)
@@ -135,6 +134,7 @@ class SC2Process:
                     if version["label"] == strg:
                         return True
                 return False
+
             valid_version_string = special_match(self._sc2_version)
             if valid_version_string:
                 self._data_hash = self.find_data_hash(self._sc2_version)
