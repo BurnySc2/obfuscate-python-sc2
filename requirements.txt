@@ -1,2 +1,2 @@
 pyinstaller
-sc2
+burnysc2

@@ -80,7 +80,9 @@ random
 codecs
 shutil
 math
+cmath
 numpy
+itertools
 '''
 
 
@@ -109,11 +111,4 @@ run.py
 plain_names = '''
 opy
 poly_walker_test
-await
-super
-run_game
-realtime
-metaclass
-s2clientprotocol
-async
 '''

@@ -4,8 +4,8 @@ from sc2 import Race, Difficulty
 from sc2.player import Bot, Computer
 
 # Load bot
-from CreepyBot import CreepyBot
-bot = Bot(Race.Zerg, CreepyBot())
+from MassReaperBot import MassReaperBot
+bot = Bot(Race.Terran, MassReaperBot())
 
 # Start game
 if __name__ == '__main__':
