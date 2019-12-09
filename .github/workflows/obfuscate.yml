@@ -1,4 +1,4 @@
-name: Python
+name: Obfuscate
 
 # Help: https://help.github.com/en/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions
 
@@ -29,7 +29,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt-get install tree
           pip install burnysc2 pyinstaller
           mkdir tempFolder
           mkdir mybot_obfuscated
@@ -41,7 +40,7 @@ jobs:
 
       - name: Move bot to tempFolder
         run: |
-          mv mybot/* tempFolder/
+          move mybot/* tempFolder/
 
       - name: Obfuscate
         run: |
@@ -49,8 +48,9 @@ jobs:
 
       - name: Move sc2/ folder to obfuscated folder
         run: |
-          mv sc2 mybot_obfuscated/
-          tree mybot_obfuscated
+          move sc2 mybot_obfuscated/
+          dir mybot_obfuscated
+          ls mybot_obfuscated
 
       - name: Upload obfuscated files
         uses: actions/upload-artifact@v1
