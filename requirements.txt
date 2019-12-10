@@ -1,2 +1,3 @@
 pyinstaller
 burnysc2
+pycrypto
