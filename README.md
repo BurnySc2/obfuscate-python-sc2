@@ -53,6 +53,4 @@ However, it may still take some times to read the code obfuscated by [Opy](https
 
 - Does not work with f strings
 
-- All bot files need to be in the same folder (there have to be no sub folders in "mybot" folder)
-
-- There may be some enums of the python-sc2 library not being taken care of.
+- There may be some variables of the python-sc2 library not being taken care of, especially variables from protobuf, e.g. unit._proto.movement_speed. Just add these variables to `plain_names` in opy_config_default.txt
