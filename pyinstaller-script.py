@@ -19,7 +19,10 @@ def build_pyinstaller_arguments(python_executable_path, starcraft2_path, python_
     arguments = []
 
     arguments.append(python_executable_path)
+
+    # Disable asserts, does not seem to work anymore?
     # arguments.append("-OO")
+
     arguments.append("-m")
     arguments.append("PyInstaller")
 
@@ -77,9 +80,6 @@ if __name__ == "__main__":
 
     # Create the .exe file
     pyinstaller_arguments = build_pyinstaller_arguments(python_executable_path, dll_path, python_sc2_path, run_file_path, output_folder_path, ecryption_key_path)
-
-    # # Disable assert statements
-    # pyinstaller_arguments.insert(1, "-O")
 
     os.makedirs(output_folder_path, exist_ok=True)
 
