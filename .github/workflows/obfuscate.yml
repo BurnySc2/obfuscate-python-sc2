@@ -17,7 +17,7 @@ jobs:
         # If all type annotations were removed, this library should run in py3.6 and perhaps even 3.5
         os: [windows-latest]
 #        os: [macos-latest, windows-latest, ubuntu-latest]
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [3.7, 3.8]
 
     steps:
       - uses: actions/checkout@v1
@@ -29,8 +29,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # pip install burnysc2
-          # pip install pyinstaller
           pip install -r requirements.txt
           mkdir tempFolder
           mkdir mybot_obfuscated
@@ -45,18 +43,18 @@ jobs:
         run: |
           move mybot/* tempFolder/
 
-      - name: Obfuscate
+      - name: Obfuscate bot
         run: |
           python opy.py tempFolder mybot_obfuscated tempFolder/opy_config.txt
 
       - name: Compile using Pyinstaller
         run: |
           python pyinstaller-script.py
+          ls mybot_compiled
 
       - name: Move sc2/ folder to obfuscated folder
         run: |
           move sc2 mybot_obfuscated/
-          dir mybot_obfuscated
           ls mybot_obfuscated
 
       - name: Upload obfuscated files
