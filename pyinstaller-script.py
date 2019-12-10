@@ -51,8 +51,8 @@ def build_pyinstaller_arguments(python_executable_path, starcraft2_path, python_
 
     # Encryption using the --key=mykey pyinstaller parameter. Checks if pycrypto is installed
     try:
-        encryption_key = ""
         import pycrypt
+        encryption_key = ""
         if os.path.isfile(ecryption_key_path):
             with open(ecryption_key_path) as f:
                 # Remove possibly unwanted newline, tab or space characters, as they also might be invalid characters
