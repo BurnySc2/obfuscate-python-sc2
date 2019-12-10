@@ -7,7 +7,7 @@ on: [push, pull_request]
 jobs:
   obfuscate:
     # Run pytest tests on pickle files (pre-generated SC2 API observations)
-    name: Obfuscate
+    name: Obfuscate and compile
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     strategy:
@@ -31,9 +31,10 @@ jobs:
         run: |
           # pip install burnysc2
           # pip install pyinstaller
-          # pip install -r requirements.txt
+          pip install -r requirements.txt
           mkdir tempFolder
           mkdir mybot_obfuscated
+          mkdir mybot_compiled
 
       # Create config
       - name: Run regex_output_config.py
@@ -48,6 +49,10 @@ jobs:
         run: |
           python opy.py tempFolder mybot_obfuscated tempFolder/opy_config.txt
 
+      - name: Compile using Pyinstaller
+        run: |
+          python pyisntaller-script.py
+
       - name: Move sc2/ folder to obfuscated folder
         run: |
           move sc2 mybot_obfuscated/
@@ -59,4 +64,10 @@ jobs:
         with:
           name: Bot_obfuscated_${{ matrix.python-version }}
           path: mybot_obfuscated
+
+      - name: Upload compiled run.exe file
+        uses: actions/upload-artifact@v1
+        with:
+          name: Bot_compiled_${{ matrix.python-version }}
+          path: mybot_compiled
 

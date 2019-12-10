@@ -16,4 +16,6 @@ RD /Q /S mybot_obfuscated
 
 python opy.py tempFolder mybot_obfuscated tempFolder/opy_config.txt
 
+python pyisntaller-script.py
+
 robocopy sc2 mybot_obfuscated/sc2 /E
