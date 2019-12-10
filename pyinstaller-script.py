@@ -25,10 +25,6 @@ def build_pyinstaller_arguments(python_executable_path, starcraft2_path, python_
 
     arguments.append("--onefile")
 
-    # We use the sc2 module as folder directly, not from the pip installation
-    arguments.append("--exclude-module")
-    arguments.append("sc2")
-
     sc2_dlls = ["icuin52.dll", "icuuc52.dll", "icudt52.dll"]
     for sc2_dll in sc2_dlls:
         dll_path = os.path.join(starcraft2_path, sc2_dll)
