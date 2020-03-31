@@ -41,6 +41,11 @@ jobs:
           mkdir mybot_obfuscated
           mkdir mybot_compiled
 
+      - name: Show scipy/.libs folder contents
+        run: |
+          echo "Showing contents of scipy/.libs folder
+          ls C:\hostedtoolcache\windows\Python\3.7.6\x64\Lib\site-packages\scipy\.libs
+
       # Create config
       - name: Run regex_output_config.py
         run: |

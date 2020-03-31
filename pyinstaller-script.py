@@ -14,7 +14,9 @@ python_sc2_path = folder_path / "sc2"
 ecryption_key_path = folder_path / "encryptionkey.txt"
 
 
-def build_pyinstaller_arguments(python_executable_path, starcraft2_path, python_sc2_path, run_file_path, output_folder_path, ecryption_key_path) -> list:
+def build_pyinstaller_arguments(
+    python_executable_path, starcraft2_path, python_sc2_path, run_file_path, output_folder_path, ecryption_key_path
+) -> list:
     """ Returns a list of subprocess.Popen(LIST) arguments """
     arguments = []
 
@@ -38,7 +40,7 @@ def build_pyinstaller_arguments(python_executable_path, starcraft2_path, python_
     arguments.append(f"{python_sc2_path};sc2")
 
     # Add scipy dlls
-    print("Scipy folder:", scipy_dlls_path.absolute())
+    print(f"Scipy folder: {scipy_dlls_path.absolute()}")
     for dll_path in scipy_dlls_path.iterdir():
         arguments.append("--add-binary")
         arguments.append(f"{dll_path};.")
@@ -53,6 +55,7 @@ def build_pyinstaller_arguments(python_executable_path, starcraft2_path, python_
     # Encryption using the --key=mykey pyinstaller parameter. Checks if pycrypto is installed
     try:
         import pycrypt
+
         encryption_key = ""
         if os.path.isfile(ecryption_key_path):
             with open(ecryption_key_path) as f:
@@ -76,11 +79,11 @@ def build_pyinstaller_arguments(python_executable_path, starcraft2_path, python_
     return arguments
 
 
-
 if __name__ == "__main__":
-
     # Create the .exe file
-    pyinstaller_arguments = build_pyinstaller_arguments(python_executable_path, dll_path, python_sc2_path, run_file_path, output_folder_path, ecryption_key_path)
+    pyinstaller_arguments = build_pyinstaller_arguments(
+        python_executable_path, dll_path, python_sc2_path, run_file_path, output_folder_path, ecryption_key_path
+    )
 
     os.makedirs(output_folder_path, exist_ok=True)
 
@@ -88,4 +91,3 @@ if __name__ == "__main__":
     result = process.communicate()
 
     print("Success.")
-
