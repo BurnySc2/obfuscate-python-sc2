@@ -38,6 +38,7 @@ def build_pyinstaller_arguments(python_executable_path, starcraft2_path, python_
     arguments.append(f"{python_sc2_path};sc2")
 
     # Add scipy dlls
+    print("Scipy folder:", scipy_dlls_path.absolute())
     for dll_path in scipy_dlls_path.iterdir():
         arguments.append("--add-binary")
         arguments.append(f"{dll_path};.")
